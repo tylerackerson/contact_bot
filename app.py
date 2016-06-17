@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, jsonify, request
 from faker import Factory
 from twilio.access_token import AccessToken, IpMessagingGrant
+import contact_bot
 
 app = Flask(__name__)
 fake = Factory.create()
@@ -11,12 +12,14 @@ fake = Factory.create()
 def index():
     return render_template('index.html')
 
-@app.route('/respond', methods=['POST'])
+@app.route('/incoming', methods=['POST'])
 def respond():
     response = request.form.get('response')
     user = request.form.get('user')
     company = request.form.get('company')
 
+    message = "From {0} who works at {1}: {2}".format(user, company, response)
+    contact_bot.handle_command(message, 'C1EU7HEH0')
     return jsonify(response=response, user=user, company=company)
 
 @app.route('/token')
