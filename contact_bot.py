@@ -1,25 +1,31 @@
 import os
 import time
+import requests
 from slackclient import SlackClient
 
 BOT_ID = os.environ.get('BOT_ID')
 BOT_NAME ='contact_bot'
 
 AT_BOT = "<@" + BOT_ID + ">:"
-EXAMPLE_COMMAND = "echo"
 
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
 print(os.environ.get('SLACK_BOT_TOKEN'))
 print(os.environ.get('BOT_ID'))
 
-def handle_command(command, channel):
-    response = command
+def handle_command(message, channel):
+    response = message
     # print("channel: {0}".format(channel))
     slack_client.api_call(
         "chat.postMessage",
         channel=channel,
         text=response, as_user=True
         )
+
+
+def handle_response(message):
+    response = message
+    # create IP messaging response from bot from here
+
 
 def handle_default_response(channel):
     """
@@ -36,6 +42,7 @@ def handle_default_response(channel):
         text=response, as_user=True
         )
 
+
 def parse_slack_output(slack_rtm_output):
     """
         The Slack Real Time Messaging API is an events firehose.
@@ -46,23 +53,42 @@ def parse_slack_output(slack_rtm_output):
     if output_list and len(output_list) > 0:
         print output_list
         for output in output_list:
-            if output and 'text' in output and EXAMPLE_COMMAND in output['text']:
-                command = output['text'].split(EXAMPLE_COMMAND)[1].strip().lower()
-                return command, \
-                       output['channel']
+            if output and 'text' in output and "echo" in output['text']:
+                message = output['text'].split("echo")[1].strip().lower()
+
+                return message, \
+                       output['channel'], \
+                       ""
+
+            if output and 'text' in output and 'respond' in output['text']:
+                message = output['text'].split('respond')[1].strip().lower()
+                command = 'respond'
+
+                return message, \
+                       output['channel'], \
+                       command
+
             if output and 'text' in output and AT_BOT in output['text']:
+
                 return "", \
-                       output['channel']
-    return None, None
+                       output['channel'], \
+                       ""
+    return None, None, None
 
 
 if __name__ == "__main__":
     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
+
+    r = requests.get('http://localhost:3000/token', data={'identity': 'contact_bot', 'device': 'BOT'})
+    BOT_TOKEN =  r.json()['token'];
+
     if slack_client.rtm_connect():
         print("Contact Bot connected and running!")
         while True:
-            command, channel = parse_slack_output(slack_client.rtm_read())
-            if command and channel:
+            message, channel, command = parse_slack_output(slack_client.rtm_read())
+            if message and channel and command == 'respond':
+                handle_response(message, channel)
+            if message and channel:
                 handle_command(command, channel)
             elif channel:
                 print('default')

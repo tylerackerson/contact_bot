@@ -12,7 +12,18 @@ fake = Factory.create()
 def index():
     return render_template('index.html')
 
+
 @app.route('/incoming', methods=['POST'])
+def incoming():
+    user = request.form.get('user')
+    message = request.form.get('message')
+
+    message = "User *{0}*: {1}".format(user, message)
+    contact_bot.handle_command(message, 'C1EU7HEH0')
+    return jsonify(response=message, user=user, company=company)
+
+
+@app.route('/respond', methods=['POST'])
 def respond():
     response = request.form.get('response')
     user = request.form.get('user')
