@@ -1,3 +1,5 @@
 Flask==0.10.1
 twilio==5.4.0
 fake-factory==0.5.3
+future==0.15.2
+websocket-client==0.35.0

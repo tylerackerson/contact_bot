@@ -3,6 +3,7 @@ import time
 from slackclient import SlackClient
 
 BOT_ID = os.environ.get('BOT_ID')
+BOT_NAME ='contact_bot'
 
 AT_BOT = "<@" + BOT_ID + ">:"
 EXAMPLE_COMMAND = "echo"
@@ -13,6 +14,7 @@ print(os.environ.get('BOT_ID'))
 
 def handle_command(command, channel):
     response = command
+    # print("channel: {0}".format(channel))
     slack_client.api_call(
         "chat.postMessage",
         channel=channel,
@@ -33,7 +35,6 @@ def handle_default_response(channel):
         channel=channel,
         text=response, as_user=True
         )
-
 
 def parse_slack_output(slack_rtm_output):
     """
