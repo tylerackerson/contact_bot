@@ -15,22 +15,24 @@ def index():
 
 @app.route('/incoming', methods=['POST'])
 def incoming():
+    generalChannel = os.environ['SLACK_CHANNEL']
     user = request.form.get('user')
     message = request.form.get('message')
 
     message = "User *{0}*: {1}".format(user, message)
-    contact_bot.handle_command(message, 'C1EU7HEH0')
+    contact_bot.handle_command(message, generalChannel)
     return jsonify(response=message, user=user, company=company)
 
 
 @app.route('/respond', methods=['POST'])
 def respond():
+    generalChannel = os.environ['SLACK_CHANNEL']
     response = request.form.get('response')
     user = request.form.get('user')
     company = request.form.get('company')
 
     message = "From {0} who works at {1}: {2}".format(user, company, response)
-    contact_bot.handle_command(message, 'C1EU7HEH0')
+    contact_bot.handle_command(message, generalChannel)
     return jsonify(response=response, user=user, company=company)
 
 @app.route('/token')
