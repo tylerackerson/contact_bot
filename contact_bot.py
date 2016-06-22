@@ -79,8 +79,8 @@ def parse_slack_output(slack_rtm_output):
 if __name__ == "__main__":
     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
 
-    r = requests.get('http://localhost:3000/token', data={'identity': 'contact_bot', 'device': 'BOT'})
-    BOT_TOKEN =  r.json()['token'];
+    # r = requests.get('http://localhost:3000/token', data={'identity': 'contact_bot', 'device': 'BOT'})
+    # BOT_TOKEN =  r.json()['token'];
 
     if slack_client.rtm_connect():
         print("Contact Bot connected and running!")
