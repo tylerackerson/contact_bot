@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, jsonify, request
 from faker import Factory
 from twilio.access_token import AccessToken, IpMessagingGrant
+from slackclient import SlackClient
 import contact_bot
 
 app = Flask(__name__)
@@ -59,3 +60,20 @@ def token():
 if __name__ == '__main__':
     app.debug = True
     app.run(port=3000)
+
+    READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
+
+    if slack_client.rtm_connect():
+        print("Contact Bot connected and running!")
+        while True:
+            message, channel, command = parse_slack_output(slack_client.rtm_read())
+            if message and channel and command == 'respond':
+                handle_response(message)
+            if message and channel:
+                handle_command(command, channel)
+            elif channel:
+                print('default')
+                handle_default_response(channel)
+            time.sleep(READ_WEBSOCKET_DELAY)
+    else:
+        print("Connection failed. Invalid Slack token or bot ID?")

@@ -1,7 +1,7 @@
 import os
 import time
 import requests
-from slackclient import SlackClient
+# from slackclient import SlackClient
 
 BOT_ID = os.environ.get('BOT_ID')
 BOT_NAME ='contact_bot'
@@ -76,20 +76,20 @@ def parse_slack_output(slack_rtm_output):
     return None, None, None
 
 
-if __name__ == "__main__":
-    READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
-
-    if slack_client.rtm_connect():
-        print("Contact Bot connected and running!")
-        while True:
-            message, channel, command = parse_slack_output(slack_client.rtm_read())
-            if message and channel and command == 'respond':
-                handle_response(message)
-            if message and channel:
-                handle_command(command, channel)
-            elif channel:
-                print('default')
-                handle_default_response(channel)
-            time.sleep(READ_WEBSOCKET_DELAY)
-    else:
-        print("Connection failed. Invalid Slack token or bot ID?")
+# if __name__ == "__main__":
+#     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
+#
+#     if slack_client.rtm_connect():
+#         print("Contact Bot connected and running!")
+#         while True:
+#             message, channel, command = parse_slack_output(slack_client.rtm_read())
+#             if message and channel and command == 'respond':
+#                 handle_response(message)
+#             if message and channel:
+#                 handle_command(command, channel)
+#             elif channel:
+#                 print('default')
+#                 handle_default_response(channel)
+#             time.sleep(READ_WEBSOCKET_DELAY)
+#     else:
+#         print("Connection failed. Invalid Slack token or bot ID?")
