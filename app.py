@@ -26,14 +26,11 @@ def incoming():
 
 @app.route('/respond', methods=['POST'])
 def respond():
-    generalChannel = os.environ['SLACK_CHANNEL']
-    response = request.form.get('response')
-    user = request.form.get('user')
-    company = request.form.get('company')
+    message = request.form["message"]
+    print(message)
 
-    message = "From {0} who works at {1}: {2}".format(user, company, response)
-    contact_bot.handle_command(message, generalChannel)
-    return jsonify(response=response, user=user, company=company)
+    return jsonify(message=message)
+
 
 @app.route('/token')
 def token():
@@ -43,22 +40,20 @@ def token():
     api_secret = os.environ['TWILIO_API_SECRET']
     service_sid = os.environ['TWILIO_IPM_SERVICE_SID']
 
-    # create a randomly generated username for the client
     identity = fake.user_name()
-
-    # Create a unique endpoint ID for the
     device_id = request.args.get('device')
     endpoint = "TwilioChatDemo:{0}:{1}".format(identity, device_id)
-
-    # Create access token with credentials
     token = AccessToken(account_sid, api_key, api_secret, identity)
-
-    # Create an IP Messaging grant and add to token
     ipm_grant = IpMessagingGrant(endpoint_id=endpoint, service_sid=service_sid)
     token.add_grant(ipm_grant)
 
-    # Return token info as JSON
-    return jsonify(identity=identity, token=token.to_jwt())
+    bot_identity = 'contact_bot'
+    bot_endpoint = "TwilioChatDemo:{0}:{1}".format(bot_identity, device_id)
+    bot_token = AccessToken(account_sid, api_key, api_secret, bot_identity)
+    bot_ipm_grant = IpMessagingGrant(endpoint_id=bot_endpoint, service_sid=service_sid)
+    bot_token.add_grant(bot_ipm_grant)
+
+    return jsonify(identity=identity, token=token.to_jwt(), bot_token=bot_token.to_jwt())
 
 
 if __name__ == '__main__':
