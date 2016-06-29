@@ -1,20 +1,24 @@
-import os
+# import os
+# from flask import Flask, render_template, jsonify, request
 import time
 import requests
+import random, string
+import constants
+from twilio.rest.ip_messaging import TwilioIpMessagingClient
 from slackclient import SlackClient
 
-BOT_ID = os.environ.get('BOT_ID')
-BOT_NAME ='contact_bot'
 
-AT_BOT = "<@" + BOT_ID + ">:"
+def get_bot_token():
+    identity = ''.join(random.choice(string.lowercase) for i in range(10))
+    endpoint = "TwilioChatDemo:{0}:{1}".format('contact_bot', identity)
+    token = AccessToken(account_sid, api_key, api_secret, identity)
+    ipm_grant = IpMessagingGrant(endpoint_id=endpoint, service_sid=service_sid)
+    token.add_grant(ipm_grant)
 
-slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
-print(os.environ.get('SLACK_BOT_TOKEN'))
-print(os.environ.get('BOT_ID'))
+    bot_token=bot_token.to_jwt()
 
 def handle_command(message, channel):
     response = message
-    # print("channel: {0}".format(channel))
     slack_client.api_call(
         "chat.postMessage",
         channel=channel,
@@ -23,8 +27,15 @@ def handle_command(message, channel):
 
 
 def handle_response(message):
-    r = requests.post ('http://localhost:3000/respond', data={'message': message})
-    # create IP messaging response from bot from here
+    print('got here')
+
+    token = get_bot_token()
+    client = TwilioIpMessagingClient(constants.TWILIO_ACCOUNT_SID, token)
+
+    # List the channels
+    service = client.services.get(constants.TWILIO_SERVICE_SID)
+    for c in service.channels.list():
+        print(c.sid)
 
 
 def handle_default_response(channel):
@@ -76,7 +87,16 @@ def parse_slack_output(slack_rtm_output):
     return None, None, None
 
 
-if __name__ == "__main__":
+# if __name__ == '__main__':
+    contact_bot.run(port=8000)
+    contact_bot.debug = True
+
+    print(constants.SLACK_BOT_TOKEN)
+    print(constants.SLACK_BOT_ID)
+
+    slack_client = SlackClient(constants.SLACK_BOT_TOKEN)
+    print(slack_client)
+
     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
 
     if slack_client.rtm_connect():
