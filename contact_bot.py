@@ -1,24 +1,31 @@
-# import os
-# from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request
 import time
 import requests
 import random, string
 import constants
 from twilio.rest.ip_messaging import TwilioIpMessagingClient
+from twilio.access_token import AccessToken, IpMessagingGrant
 from slackclient import SlackClient
 
+contact_bot = Flask(__name__)
 
-def get_bot_token():
-    identity = ''.join(random.choice(string.lowercase) for i in range(10))
-    endpoint = "TwilioChatDemo:{0}:{1}".format('contact_bot', identity)
-    token = AccessToken(account_sid, api_key, api_secret, identity)
-    ipm_grant = IpMessagingGrant(endpoint_id=endpoint, service_sid=service_sid)
-    token.add_grant(ipm_grant)
+# def get_bot_token():
+#     identity = ''.join(random.choice(string.lowercase) for i in range(10))
+#     endpoint = "TwilioChatDemo:{0}:{1}".format('contact_bot', identity)
+#     token = AccessToken(
+#         constants.TWILIO_ACCOUNT_SID,
+#         constants.TWILIO_API_KEY,
+#         constants.TWILIO_API_SECRET,
+#         identity)
+#     ipm_grant = IpMessagingGrant(endpoint_id=endpoint, service_sid=constants.TWILIO_SERVICE_SID)
+#     token.add_grant(ipm_grant)
+#
+#     return token.to_jwt()
 
-    bot_token=bot_token.to_jwt()
 
 def handle_command(message, channel):
     response = message
+    slack_client = SlackClient(constants.SLACK_BOT_TOKEN)
     slack_client.api_call(
         "chat.postMessage",
         channel=channel,
@@ -27,26 +34,16 @@ def handle_command(message, channel):
 
 
 def handle_response(message):
-    print('got here')
-
-    token = get_bot_token()
-    client = TwilioIpMessagingClient(constants.TWILIO_ACCOUNT_SID, token)
-
-    # List the channels
+    client = TwilioIpMessagingClient(constants.TWILIO_ACCOUNT_SID, constants.TWILIO_AUTH_TOKEN)
     service = client.services.get(constants.TWILIO_SERVICE_SID)
-    for c in service.channels.list():
-        print(c.sid)
-
+    channel = service.channels.list()[-1]
+    messages = channel.messages.create(body=message)
 
 def handle_default_response(channel):
-    """
-        Receives commands directed at the bot and determines if they
-        are valid commands. If so, then acts on the commands. If not,
-        returns back what it needs for clarification.
-    """
     print("default response")
 
     response = "Look -- I'm new here. And kind of stupid. Don't expect me to do much for now."
+    slack_client = SlackClient(constants.SLACK_BOT_TOKEN)
     slack_client.api_call(
         "chat.postMessage",
         channel=channel,
@@ -55,11 +52,6 @@ def handle_default_response(channel):
 
 
 def parse_slack_output(slack_rtm_output):
-    """
-        The Slack Real Time Messaging API is an events firehose.
-        this parsing function returns None unless a message is
-        directed at the Bot, based on its ID.
-    """
     output_list = slack_rtm_output
     if output_list and len(output_list) > 0:
         print output_list
@@ -79,7 +71,7 @@ def parse_slack_output(slack_rtm_output):
                        output['channel'], \
                        command
 
-            if output and 'text' in output and AT_BOT in output['text']:
+            if output and 'text' in output and constants.SLACK_AT_BOT in output['text']:
 
                 return "", \
                        output['channel'], \
@@ -87,8 +79,7 @@ def parse_slack_output(slack_rtm_output):
     return None, None, None
 
 
-# if __name__ == '__main__':
-    contact_bot.run(port=8000)
+if __name__ == "__main__":
     contact_bot.debug = True
 
     print(constants.SLACK_BOT_TOKEN)

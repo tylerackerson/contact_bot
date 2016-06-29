@@ -16,10 +16,15 @@ Contact Bot will use Twilio and Slack to facilitate communication between two us
 1. Copy `config.env.example` and rename it `config.env`
 2. Fill in all the environment variables
 
-### Start the contact bot app
+### Start the app
 1. virtualenv contact_bot
 2. source contact_bot/bin/activate
 3. . ./config.env
 4. python app.py
 5. Go to localhost:3000
-6. Start chatting
+
+### Start the contact bot app
+1. virtualenv contact_bot
+2. source contact_bot/bin/activate
+3. . ./config.env
+4. python contact_bot.py

@@ -30,7 +30,11 @@ def token():
     identity = fake.user_name()
     device_id = request.args.get('device')
     endpoint = "TwilioChatDemo:{0}:{1}".format(identity, device_id)
-    token = AccessToken(constants.TWILIO_ACCOUNT_SID, constants.TWILIO_API_KEY, api_secret, identity)
+    token = AccessToken(
+        constants.TWILIO_ACCOUNT_SID,
+        constants.TWILIO_API_KEY,
+        constants.TWILIO_API_SECRET,
+        identity)
     ipm_grant = IpMessagingGrant(endpoint_id=endpoint, service_sid=constants.TWILIO_SERVICE_SID)
     token.add_grant(ipm_grant)
 
