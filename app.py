@@ -16,13 +16,13 @@ def index():
 
 @app.route('/incoming', methods=['POST'])
 def incoming():
-    generalChannel = constants.SLACK_CHANNEL
+    # generalChannel = constants.SLACK_CHANNEL
     user = request.form.get('user')
     message = request.form.get('message')
 
     message = "User *{0}*: {1}".format(user, message)
-    contact_bot.handle_command(message, generalChannel)
-    return jsonify(response=message, user=user)
+    contact_bot.handle_incoming(message, user)
+    return jsonify(incoming=message, user=user)
 
 
 @app.route('/token')
