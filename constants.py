@@ -2,8 +2,9 @@ import os
 
 SLACK_BOT_ID = os.environ.get('SLACK_BOT_ID')
 SLACK_BOT_TOKEN = os.environ.get('SLACK_BOT_TOKEN')
+SLACK_BOT_NAME =' contact_bot'
 SLACK_API_TOKEN = os.environ.get('SLACK_API_TOKEN')
-SLACK_BOT_NAME ='contact_bot'
+SLACK_USER_ID = os.environ.get('SLACK_USER_ID')
 
 TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
 TWILIO_API_KEY = os.environ['TWILIO_API_KEY']

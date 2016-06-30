@@ -14,7 +14,7 @@ def handle_incoming(message, user):
     slack_client = SlackClient(constants.SLACK_BOT_TOKEN)
 
     # channel = find_user_channel(user) or create_user_channel(user)
-    # channel_id = create_user_channel(user)
+    channel_id = create_user_channel(user)
 
     print(channel_id)
     print(message)
@@ -36,7 +36,7 @@ def handle_incoming(message, user):
 def create_user_channel(user):
     channel_name = "chat-{0}".format(user)
 
-    create_channel_url = 'https://slack.com/api/channels.create?token={0}&name={1}&pretty=1'.format(
+    create_channel_url = 'https://slack.com/api/groups.create?token={0}&name={1}&pretty=1'.format(
         constants.SLACK_API_TOKEN, channel_name)
 
     r = requests.post(create_channel_url)
@@ -44,16 +44,16 @@ def create_user_channel(user):
     if r.status_code == requests.codes.ok:
         data = r.json()
         channel_id = data["channel"]["id"]
-        invite_to_channel(channel_id)
+        invite_to_channel(channel_id, constants.SLACK_USER_ID)
 
         return channel_id
     else:
         return None
 
 
-def invite_to_channel(channel_id):
-    invite_to_channel_url = 'https://slack.com/api/channels.invite?token={0}channel={1}&user={2}pretty=1'.format(
-        constants.SLACK_API_TOKEN, channel_id, 'U0J3TSVJA&')
+def invite_to_channel(channel_id, user_id):
+    invite_to_channel_url = 'https://slack.com/api/groups.invite?token={0}channel={1}&user={2}pretty=1'.format(
+        constants.SLACK_API_TOKEN, channel_id, user_id)
 
     r = requests.post(invite_to_channel_url)
     data = r.json()
