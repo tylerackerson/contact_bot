@@ -23,10 +23,15 @@ def handle_incoming(message, user, ipm_channel):
     slack_client = SlackClient(constants.SLACK_BOT_TOKEN)
     channel_id = None
 
+    if user == "system":
+        return False
+
     channel_id = find_user_channel(user)
 
     if channel_id is None:
         channel_id = create_user_channel(user, ipm_channel)
+    else:
+        channel_id = channel_id[0]
 
     r = slack_client.api_call(
         "chat.postMessage",
@@ -34,8 +39,7 @@ def handle_incoming(message, user, ipm_channel):
         text=message
         )
 
-    print('response: {0}'.format(r))
-
+    return r
 
 
 def find_user_channel(user):
@@ -61,18 +65,16 @@ def find_user_channel(user):
 
 
 def create_user_channel(user, ipm_channel):
+    slack_client = SlackClient(constants.SLACK_API_TOKEN)
     channel_name = "chat-{0}".format(user)
 
-    print('creating channel: {0}'.format(channel_name))
+    r = slack_client.api_call(
+        "groups.create",
+        name=channel_name,
+        )
 
-    create_channel_url = 'https://slack.com/api/groups.create?token={0}&name={1}&pretty=1'.format(
-        constants.SLACK_API_TOKEN, channel_name)
-
-    r = requests.post(create_channel_url)
-
-    if r.status_code == requests.codes.ok:
-        data = r.json()
-        channel_id = data["group"]["id"]
+    if r["ok"]:
+        channel_id = r["group"]["id"]
         invite_to_channel(channel_id, constants.SLACK_USER_ID)
 
         # commit user + slack channel to DB
@@ -95,22 +97,29 @@ def create_user_channel(user, ipm_channel):
 
 
 def invite_to_channel(channel_id, user_id):
-    invite_bot_to_channel_url = 'https://slack.com/api/groups.invite?token={0}channel={1}&user={2}pretty=1'.format(
-    constants.SLACK_API_TOKEN, channel_id, constants.SLACK_BOT_ID)
-    r_bot = requests.post(invite_bot_to_channel_url)
+    slack_client = SlackClient(constants.SLACK_API_TOKEN)
+    slack_bot = constants.SLACK_BOT_ID
 
-    invite_to_channel_url = 'https://slack.com/api/groups.invite?token={0}channel={1}&user={2}pretty=1'.format(
-        constants.SLACK_API_TOKEN, channel_id, user_id)
+    bot_r = slack_client.api_call(
+        "groups.invite",
+        channel=channel_id,
+        user=slack_bot
+        )
 
-    r = requests.post(invite_to_channel_url)
-    data = r.json()
+    print("invited bot channel: {0}".format(bot_r))
 
-    if r.status_code == requests.codes.ok:
+    r = slack_client.api_call(
+        "groups.invite",
+        channel=channel_id,
+        user=user_id
+        )
+
+    if r["ok"]:
         print("invited to channel: {0}".format(channel_id))
-        return jsonify(data=data)
+        return r
     else:
         print("couldn't invite to channel")
-        return jsonify(data=data)
+        return r
 
 
 def parse_slack_output(slack_rtm_output):
