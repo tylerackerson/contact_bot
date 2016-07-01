@@ -10,6 +10,7 @@ from slackclient import SlackClient
 
 
 contact_bot = Flask(__name__)
+
 mysql = MySQL()
 
 contact_bot.config['MYSQL_DATABASE_USER'] = 'root'
@@ -18,17 +19,15 @@ contact_bot.config['MYSQL_DATABASE_DB'] = 'contact_bot'
 contact_bot.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(contact_bot)
 
-def handle_incoming(message, user):
+def handle_incoming(message, user, ipm_channel):
     slack_client = SlackClient(constants.SLACK_BOT_TOKEN)
     channel_id = None
 
     channel_id = find_user_channel(user)
 
     if channel_id is None:
-        channel_id = create_user_channel(user)
+        channel_id = create_user_channel(user, ipm_channel)
 
-    print('channel_id: {0}'.format(channel_id))
-    print('text: {0}'.format(message))
     r = slack_client.api_call(
         "chat.postMessage",
         channel=channel_id,
@@ -61,7 +60,7 @@ def find_user_channel(user):
     return None
 
 
-def create_user_channel(user):
+def create_user_channel(user, ipm_channel):
     channel_name = "chat-{0}".format(user)
 
     print('creating channel: {0}'.format(channel_name))
@@ -84,8 +83,9 @@ def create_user_channel(user):
                 visitors
             SET
                 user_name=%s,
-                slack_channel=%s
-            """, (user, channel_id))
+                slack_channel=%s,
+                ipm_channel=%s
+            """, (user, channel_id, ipm_channel))
 
         conn.commit()
 
@@ -111,14 +111,6 @@ def invite_to_channel(channel_id, user_id):
     else:
         print("couldn't invite to channel")
         return jsonify(data=data)
-
-
-
-def handle_response(message):
-    client = TwilioIpMessagingClient(constants.TWILIO_ACCOUNT_SID, constants.TWILIO_AUTH_TOKEN)
-    service = client.services.get(constants.TWILIO_SERVICE_SID)
-    channel = service.channels.list()[-1]
-    messages = channel.messages.create(body=message)
 
 
 def parse_slack_output(slack_rtm_output):

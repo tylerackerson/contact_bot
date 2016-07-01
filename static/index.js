@@ -94,13 +94,15 @@ $(function() {
 
         // Listen for new messages sent to the channel
         generalChannel.on('messageAdded', function(message) {
+          var ipm_channel = this.sid;
+          
+          $.post('/incoming', {
+            user: message.author,
+            message: message.body,
+            ipm_channel: ipm_channel,
+          });
 
-            $.post('/incoming', {
-              user: message.author,
-              message: message.body
-            });
-
-            printMessage(message.author, message.body);
+          printMessage(message.author, message.body);
         });
     }
 
