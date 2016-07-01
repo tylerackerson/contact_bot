@@ -16,7 +16,7 @@ mysql = MySQL()
 contact_bot.config['MYSQL_DATABASE_USER'] = 'root'
 contact_bot.config['MYSQL_DATABASE_PASSWORD'] = ''
 contact_bot.config['MYSQL_DATABASE_DB'] = 'contact_bot'
-contact_bot.config['MYSQL_DATABASE_HOST'] = 'localhost'
+contact_bot.config['MYSQL_DATABASE_HOST'] = constants.DB_HOST
 mysql.init_app(contact_bot)
 
 def handle_incoming(message, user, ipm_channel):
