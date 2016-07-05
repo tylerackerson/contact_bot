@@ -90,8 +90,9 @@ def create_user_channel(user, ipm_channel):
         invite_to_channel(channel_id, constants.SLACK_USER_ID)
 
         # commit user + slack channel to DB
-        connection_data = "host={0} dbname='contact_bot' user={1} password={2}".format(
+        connection_data = "host={0} dbname={1} user={2} password={3}".format(
             constants.DB_HOST,
+            constants.DB_NAME,
             constants.DB_USER,
             constants.DB_PASS
         )
