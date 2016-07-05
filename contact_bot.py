@@ -48,8 +48,9 @@ def find_user_channel(user):
 
     print('finding channel for {0}'.format(user))
 
-    connection_data = "host={0} dbname='contact_bot' user={1} password={2}".format(
+    connection_data = "host={0} dbname={1} user={2} password={3}".format(
         constants.DB_HOST,
+        constants.DB_NAME,
         constants.DB_USER,
         constants.DB_PASS
     )
