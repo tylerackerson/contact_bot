@@ -1,20 +1,12 @@
-$(function() {
-    // Get handle to the chat div
+IPM = {
+
+  start: function (user_name) {
+
     var $chatWindow = $('#messages');
-
-    // Manages the state of our access token we got from the server
     var accessManager;
-
-    // Our interface to the IP Messaging service
     var messagingClient;
-
-    // A handle to the "general" chat channel - the one and only channel we
-    // will have in this sample app
     var generalChannel;
-
-    // The server will assign the client a random username - store that value
-    // here
-    var username;
+    var username = user_name;
 
     // Helper function to print info messages to the chat window
     function print(infoMessage, asHtml) {
@@ -29,6 +21,7 @@ $(function() {
 
     // Helper function to print chat message to the chat window
     function printMessage(fromUser, message) {
+        debugger;
         var $user = $('<span class="username">').text(fromUser + ':');
         if (fromUser === username) {
             $user.addClass('me');
@@ -40,62 +33,50 @@ $(function() {
         $chatWindow.scrollTop($chatWindow[0].scrollHeight);
     }
 
-    // Alert the user they have been assigned a random username
-    print('Logging in...');
-
-    // Get an access token for the current user, passing a username (identity)
-    // and a device ID - for browser-based apps, we'll always just use the
-    // value "browser"
     $.getJSON('/token', {
         identity: username,
         device: 'browser'
     }, function(data) {
-        // Alert the user they have been assigned a random username
-        username = data.identity;
-        print('You have been assigned a random username of: '
-            + '<span class="me">' + username + '</span>', true);
 
-        // Initialize the IP messaging client
+        print('Starting chat...');
+
         accessManager = new Twilio.AccessManager(data.token);
         messagingClient = new Twilio.IPMessaging.Client(accessManager);
 
-        // Get the general chat channel, which is where all the messages are
-        // sent in this simple application
-        print('Attempting to join "general" chat channel...');
-        var promise = messagingClient.getChannelByUniqueName('general');
+        var channelName = 'chat-' + username;
+        var promise = messagingClient.getChannelByUniqueName(channelName);
+
         promise.then(function(channel) {
             generalChannel = channel;
             if (!generalChannel) {
-                // If it doesn't exist, let's create it
                 messagingClient.createChannel({
-                    uniqueName: 'general',
-                    friendlyName: 'General Chat Channel'
+                    uniqueName: channelName,
+                    friendlyName: channelName
                 }).then(function(channel) {
-                    console.log('Created general channel:');
+                    console.log('Created channel:' );
                     console.log(channel);
+
                     generalChannel = channel;
                     setupChannel();
                 });
             } else {
-                console.log('Found general channel:');
+                console.log('Found channel:');
                 console.log(generalChannel);
                 setupChannel();
             }
         });
     });
 
-    // Set up channel after it has been found
     function setupChannel() {
-        // Join the general channel
         generalChannel.join().then(function(channel) {
-            print('Joined channel as '
+            print('Joined chat as '
                 + '<span class="me">' + username + '</span>.', true);
         });
 
         // Listen for new messages sent to the channel
         generalChannel.on('messageAdded', function(message) {
           var ipm_channel = this.sid;
-          
+
           $.post('/incoming', {
             user: message.author,
             message: message.body,
@@ -114,4 +95,5 @@ $(function() {
             $input.val('');
         }
     });
-});
+  }
+}
