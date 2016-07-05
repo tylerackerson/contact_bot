@@ -1,23 +1,25 @@
 from flask import Flask, render_template, jsonify, request
-from flask.ext.mysql import MySQL
 from faker import Factory
-from twilio.access_token import AccessToken, IpMessagingGrant
-from twilio.rest.ip_messaging import TwilioIpMessagingClient
 import contact_bot
 import constants
 import logging
+
+from twilio.access_token import AccessToken, IpMessagingGrant
+from twilio.rest.ip_messaging import TwilioIpMessagingClient
 from slackclient import SlackClient
+
+import psycopg2
+import psycopg2.extras
+from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy.engine import create_engine
+
 
 app = Flask(__name__)
 fake = Factory.create()
+app.config['SQLALCHEMY_DATABASE_URI'] = constants.DB_HOST
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-mysql = MySQL()
-
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'contact_bot'
-app.config['MYSQL_DATABASE_HOST'] = constants.DB_HOST
-mysql.init_app(app)
 
 @app.route('/')
 def index():
@@ -44,8 +46,18 @@ def respond():
     channel_id = request.form.get('channel_id')
     text = request.form.get('text')
 
-    conn = mysql.connect()
-    cursor = conn.cursor()
+    # local DB HOST
+    connection_data = "host={0} dbname='contact_bot' user={1} password={2}".format(
+        constants.DB_HOST,
+        constants.DB_USER,
+        constants.DB_PASS
+    )
+
+    print "Connecting to database\n	->%s" % (connection_data)
+    connection = psycopg2.connect(connection_data)
+    cursor = connection.cursor()
+    print "Connected!\n"
+
     cursor.execute("""
         SELECT
             ipm_channel

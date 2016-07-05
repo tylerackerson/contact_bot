@@ -13,3 +13,5 @@ TWILIO_SERVICE_SID = os.environ['TWILIO_IPM_SERVICE_SID']
 TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
 
 DB_HOST = os.environ['DB_HOST']
+DB_USER = os.environ['DB_USER']
+DB_PASS = os.environ['DB_PASS']

@@ -1,23 +1,25 @@
 from flask import Flask, render_template, jsonify, request
-from flask.ext.mysql import MySQL
 import requests
 import time
 import random, string
 import constants
+
 from twilio.rest.ip_messaging import TwilioIpMessagingClient
 from twilio.access_token import AccessToken, IpMessagingGrant
 from slackclient import SlackClient
 
+import psycopg2
+import psycopg2.extras
+from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy.engine import create_engine
+
 
 contact_bot = Flask(__name__)
 
-mysql = MySQL()
+contact_bot.config['SQLALCHEMY_DATABASE_URI'] = constants.DB_HOST
+contact_bot.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(contact_bot)
 
-contact_bot.config['MYSQL_DATABASE_USER'] = 'root'
-contact_bot.config['MYSQL_DATABASE_PASSWORD'] = ''
-contact_bot.config['MYSQL_DATABASE_DB'] = 'contact_bot'
-contact_bot.config['MYSQL_DATABASE_HOST'] = constants.DB_HOST
-mysql.init_app(contact_bot)
 
 def handle_incoming(message, user, ipm_channel):
     slack_client = SlackClient(constants.SLACK_BOT_TOKEN)
@@ -46,8 +48,17 @@ def find_user_channel(user):
 
     print('finding channel for {0}'.format(user))
 
-    conn = mysql.connect()
-    cursor = conn.cursor()
+    connection_data = "host={0} dbname='contact_bot' user={1} password={2}".format(
+        constants.DB_HOST,
+        constants.DB_USER,
+        constants.DB_PASS
+    )
+
+    print "Connecting to database\n	->%s" % (connection_data)
+    connection = psycopg2.connect(connection_data)
+    cursor = connection.cursor()
+    print "Connected!\n"
+
     cursor.execute("""
         SELECT
             slack_channel
@@ -78,18 +89,25 @@ def create_user_channel(user, ipm_channel):
         invite_to_channel(channel_id, constants.SLACK_USER_ID)
 
         # commit user + slack channel to DB
-        conn = mysql.connect()
-        cursor = conn.cursor()
+        connection_data = "host={0} dbname='contact_bot' user={1} password={2}".format(
+            constants.DB_HOST,
+            constants.DB_USER,
+            constants.DB_PASS
+        )
+
+        print "Connecting to database\n	->%s" % (connection_data)
+        connection = psycopg2.connect(connection_data)
+        cursor = connection.cursor()
+        print "Connected!\n"
+
         cursor.execute("""
             INSERT INTO
-                visitors
-            SET
-                user_name=%s,
-                slack_channel=%s,
-                ipm_channel=%s
+                visitors (user_name, slack_channel, ipm_channel)
+            VALUES
+                (%s, %s, %s)
             """, (user, channel_id, ipm_channel))
 
-        conn.commit()
+        connection.commit()
 
         return channel_id
     else:
@@ -132,7 +150,6 @@ def parse_slack_output(slack_rtm_output):
 
 if __name__ == "__main__":
     contact_bot.debug = True
-    mysql = MySQL(contact_bot)
 
     print(constants.SLACK_BOT_TOKEN)
     print(constants.SLACK_BOT_ID)
