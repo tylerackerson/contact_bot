@@ -1,5 +1,4 @@
 from flask import Flask, render_template, jsonify, request
-from faker import Factory
 import contact_bot
 import constants
 import logging
@@ -15,7 +14,6 @@ from sqlalchemy.engine import create_engine
 
 
 app = Flask(__name__)
-fake = Factory.create()
 app.config['SQLALCHEMY_DATABASE_URI'] = constants.DB_HOST
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -85,7 +83,7 @@ def respond():
 
 @app.route('/token')
 def token():
-    identity = fake.user_name()
+    identity = request.args.get('identity')
     device_id = request.args.get('device')
     endpoint = "TwilioChatDemo:{0}:{1}".format(identity, device_id)
     token = AccessToken(

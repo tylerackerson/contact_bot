@@ -21,7 +21,6 @@ IPM = {
 
     // Helper function to print chat message to the chat window
     function printMessage(fromUser, message) {
-        debugger;
         var $user = $('<span class="username">').text(fromUser + ':');
         if (fromUser === username) {
             $user.addClass('me');
