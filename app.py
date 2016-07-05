@@ -74,15 +74,13 @@ def respond():
 
         client = TwilioIpMessagingClient(constants.TWILIO_ACCOUNT_SID, constants.TWILIO_AUTH_TOKEN)
         service = client.services.get(constants.TWILIO_SERVICE_SID)
-
-        # currently ipm_channel is unicode -- needs to be string
         channel = service.channels.get(sid=ipm_channel)
 
         response = channel.messages.create(body=text)
     else:
         print('no ipm channel')
 
-    return jsonify(response_type='in_channel', text=text)
+    return jsonify(text=text)
 
 
 @app.route('/token')

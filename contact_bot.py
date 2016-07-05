@@ -38,7 +38,8 @@ def handle_incoming(message, user, ipm_channel):
     r = slack_client.api_call(
         "chat.postMessage",
         channel=channel_id,
-        text=message
+        text=message,
+        username='Incoming:',
         )
 
     return r
