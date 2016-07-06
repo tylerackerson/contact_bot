@@ -75,11 +75,6 @@ header a:hover {
   text-decoration:underline;
 }
 
-section {
-  height:70%;
-  background-color:#2B2B2A;
-}
-
 #chat-window input {
   display:block;
   height:52px;
@@ -123,17 +118,63 @@ form {
   padding:0;
 }
 
+/*#reference__container {
+  height: 300px;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.reference {
+  display: inline-block;
+  width: 20%;
+  margin-right: 20%
+}
+
+
+.reference__container a:last-child .reference {
+  margin-right: 0;
+}
+
+.reference div {
+  display: block;
+}
+
+.reference .logo {
+  height: 100px;
+  width: 100px;
+  margin: 0 auto;
+  background-color: white;
+  display: inline-block;
+  margin-right: 4%;
+  background-size: 100% auto;
+}
+
+.logo#elm-lang {
+  background-image: url('elm-lang.png');
+}
+
+.logo#twilio {
+  background-image: url('elm-lang.png');
+}
+
+.logo#slack {
+  background-image: url('elm-lang.png');
+}*/
+
 .info {
   margin:5px 0;
   font-style:italic;
 }
 
 .me, .username.me {
-  font-weight:bold;
   color: #E68A12;
 }
-
-.message-container .username.me {
+.message-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.message-container .username {
+  font-weight:bold;
+  margin-right: 5px;
   display:inline-block;
-  margin-right:5px;
 }
