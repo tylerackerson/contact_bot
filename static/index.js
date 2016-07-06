@@ -8,7 +8,6 @@ IPM = {
     var generalChannel;
     var username = user_name;
 
-    // Helper function to print info messages to the chat window
     function print(infoMessage, asHtml) {
         var $msg = $('<div class="info">');
         if (asHtml) {
@@ -19,7 +18,6 @@ IPM = {
         $chatWindow.append($msg);
     }
 
-    // Helper function to print chat message to the chat window
     function printMessage(fromUser, message) {
         var $user = $('<span class="username">').text(fromUser + ':');
         if (fromUser === username) {
@@ -72,7 +70,6 @@ IPM = {
           print('Joined chat as ' + '<span class="me">' + username + '</span>.', true);
         });
 
-        // Listen for new messages sent to the channel
         generalChannel.on('messageAdded', function(message) {
           var ipm_channel = this.sid;
 
@@ -86,7 +83,6 @@ IPM = {
         });
     }
 
-    // Send a new message to the general channel
     var $input = $('#chat-input');
     $input.on('keydown', function(e) {
         if (e.keyCode == 13) {

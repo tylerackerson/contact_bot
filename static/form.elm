@@ -3,7 +3,7 @@ port module Form exposing (..)
 import Html.App
 import Html exposing (..)
 import Html.Events exposing (..)
-import Html.Attributes exposing (id, placeholder, type', for, value, class, disabled, classList)
+import Html.Attributes exposing (id, href, target, placeholder, type', for, value, class, disabled, classList)
 
 
 view model =
@@ -49,6 +49,57 @@ view model =
                 , onInput (\str -> { msgType = "input", payload = str })
                 ]
                 []
+            ]
+        , div [ class "references__container" ]
+            [ h1 [ class "references__header" ] [ text "sources" ]
+            , a
+                [ class "reference__link"
+                , href "https://www.twilio.com/"
+                , target "_blank"
+                ]
+                [ div [ class "reference reference--twilio" ]
+                    [ div [ class "reference__logo" ]
+                        []
+                    , div [ class "reference__name" ]
+                        [ text "twilio" ]
+                    ]
+                ]
+            , a
+                [ class "reference__link"
+                , href "https://api.slack.com/"
+                , target "_blank"
+                ]
+                [ div [ class "reference reference--slack" ]
+                    [ div [ class "reference__logo" ]
+                        []
+                    , div [ class "reference__name" ]
+                        [ text "slack" ]
+                    ]
+                ]
+            , a
+                [ class "reference__link"
+                , href "http://elm-lang.org/"
+                , target "_blank"
+                ]
+                [ div [ class "reference reference--elm" ]
+                    [ div [ class "reference__logo" ]
+                        []
+                    , div [ class "reference__name" ]
+                        [ text "elm" ]
+                    ]
+                ]
+            , a
+                [ class "reference__link"
+                , href "https://github.com/TylerAckerson/contact_bot"
+                , target "_blank"
+                ]
+                [ div [ class "reference reference--github" ]
+                    [ div [ class "reference__logo" ]
+                        []
+                    , div [ class "reference__name" ]
+                        [ text "view source" ]
+                    ]
+                ]
             ]
         ]
 

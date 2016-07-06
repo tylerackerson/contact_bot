@@ -1,13 +1,13 @@
-# Contact Bot
-Contact Bot will use Twilio and Slack to facilitate communication between two users. Messages will be created from a chat interface using Twilio IP Messaging and will be routed to the owner in Slack to respond. The owner can respond to the user directly from Slack, and the response will appear for the user in their chat window.
+# Contact
+Contact uses Twilio and Slack to facilitate communication between two users. Messages are created from a chat interface using Twilio IP Messaging and are routed to the owner in Slack to respond. The owner can respond to the user directly from Slack, and the response will appear for the user in their chat window.
 
-**Example use case:**
-  - I want users to be able to chat with while they're on my site
+**Primary use case:** (implemented)
+  - I want users to be able to chat with me from the site
   - I want to facilitate my end of the chat via Slack
-  - Could be a "/chat [message]" slash-command
+  - Respond to users using "/respond [message]" slash-command
 
-**Or:**
-  - Users could, from my site, ask that I talk to them via text/SMS
+**Secondary use case:** (not yet implemented)
+  - Users could ask that I connect with them via text/SMS
   - I still want to facilitate my end of the conversation via slack
   - Could be a "/sms [message]" slash-command
 

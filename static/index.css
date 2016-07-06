@@ -2,7 +2,19 @@
   box-sizing:border-box;
 }
 
-#contact-container form {
+.demo-app-link {
+  text-align: center;
+  color: lightgrey;
+  font-weight: 100;
+  font-size: 60px;
+}
+
+.demo-app-link span {
+  color: black;
+  font-weight: 700;
+}
+
+#contact form {
   width: 400px;
   border: 2px solid white;
   border-radius: 10px;
@@ -118,48 +130,77 @@ form {
   padding:0;
 }
 
-/*#reference__container {
+.references__container {
   height: 300px;
-  width: 800px;
+  width: 100%;
   margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #FFFFFF;
 }
 
-.reference {
+.references__header {
+  margin-bottom: 0;
+}
+
+.reference__link {
   display: inline-block;
   width: 20%;
-  margin-right: 20%
+  margin: 20px 0;
+  text-decoration: none;
+  font-weight: 300;
+  color: #477E91;
 }
 
-
-.reference__container a:last-child .reference {
-  margin-right: 0;
+.reference__link:hover {
+  color: #E68A18;
 }
 
-.reference div {
-  display: block;
-}
-
-.reference .logo {
-  height: 100px;
-  width: 100px;
+.reference__logo {
+  height: 70px;
+  width: 70px;
   margin: 0 auto;
   background-color: white;
   display: inline-block;
-  margin-right: 4%;
   background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
-.logo#elm-lang {
+.reference__link:hover .reference__logo {
+  color: #E68A18;
+  border-color: black;
+}
+
+.reference__link:hover .reference--twilio .reference__logo {
+  border-color: #EE3248;
+}
+
+.reference__link:hover .reference--slack .reference__logo {
+  border-color: #3EB890;
+}
+
+.reference__link:hover .reference--elm .reference__logo {
+  border-color: #5A6378;
+}
+
+.reference--elm .reference__logo {
   background-image: url('elm-lang.png');
 }
 
-.logo#twilio {
-  background-image: url('elm-lang.png');
+.reference--slack .reference__logo {
+  background-image: url('slack.png');
 }
 
-.logo#slack {
-  background-image: url('elm-lang.png');
-}*/
+.reference--twilio .reference__logo {
+  background-image: url('twilio.png');
+}
+
+.reference--github .reference__logo {
+  background-image: url('github.png');
+}
 
 .info {
   margin:5px 0;
