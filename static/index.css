@@ -2,45 +2,59 @@
   box-sizing:border-box;
 }
 
+#contact-container form {
+  width: 400px;
+  border: 2px solid white;
+  border-radius: 10px;
+  margin: 50px auto;
+  background-color: rgba(0,0,0,0.2);
+}
+
+#chat-window {
+  margin: 50px auto;
+}
+
 .hidden {
   display: none;
 }
 
 .button {
-  border: 1px solid white;
-  width: 100px;
+  border: 2px solid white;
+  width: 120px;
   text-align: center;
   border-radius: 5px;
   font-size: 20px;
-  padding: 8px 0;
+  padding: 10px 0;
+  margin: 30px auto 0;
 }
-
 
 .button:hover {
-  border-color: orange;
-  color: orange;
-  width: 100px;
-}
-
-form {
-  width: 500px;
-  padding: 10px 20px;
+  border-color: #E68A18;
+  background-color: #477E91;
+  cursor: pointer;
 }
 
 form input {
   display: block;
-  width: 200px;
-  margin: 10px 20px;
+  width: 320px;
+  height: 42px;
+  margin: 0 20px 20px;
+  font-size: 28px;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid darkgrey;
+  padding: 0;
+  color: #FFFFFF;
 }
 
-
 html, body {
-  padding:0;
-  margin:0;
-  height:100%;
-  width:100%;
-  color:#dedede;
-  background-color: #849091;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  color: #dedede;
+  background-color: #477E91;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
 
@@ -77,7 +91,16 @@ section {
   border-bottom:1px solid #2B2B2A;
   padding:0;
   font-size:42px;
-  color:#eee;
+  color: #FFFFFF;
+  visibility: visible;
+  -webkit-transition: all 2s;
+  transition: all 2s;
+}
+
+#chat-window input:disabled {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 0;
+  visibility: hidden;
 }
 
 form {
@@ -85,14 +108,9 @@ form {
   padding: 20px;
 }
 
-form input {
-  display: block;
-  width: 200px;
-  margin: 20px;
-}
-
 #messages {
-  background-color: #232323;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
   padding: 10px;
   height: 500px;
   width: 800px;
@@ -110,21 +128,9 @@ form input {
   font-style:italic;
 }
 
-.message-container {
-  margin:5px 0;
-  color:#fff;
-}
-
-.message-container .username {
-  display:inline-block;
-  margin-right:5px;
-  font-weight:bold;
-  color:#849091;
-}
-
 .me, .username.me {
   font-weight:bold;
-  color:cyan;
+  color: #E68A12;
 }
 
 .message-container .username.me {

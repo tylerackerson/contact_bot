@@ -31,7 +31,7 @@ var _user$project$Form$view = function (model) {
 							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text('Contact')
+								_elm_lang$html$Html$text('contact')
 							])),
 						A2(
 						_elm_lang$html$Html$label,
@@ -91,7 +91,7 @@ var _user$project$Form$view = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text('Start Chat')
+								_elm_lang$html$Html$text('start chat')
 							]))
 					])),
 				A2(
@@ -127,6 +127,7 @@ var _user$project$Form$view = function (model) {
 								_elm_lang$html$Html_Attributes$type$('text'),
 								_elm_lang$html$Html_Attributes$placeholder('type message here...'),
 								_elm_lang$html$Html_Attributes$value(model.input),
+								_elm_lang$html$Html_Attributes$disabled(true),
 								_elm_lang$html$Html_Events$onInput(
 								function (str) {
 									return {msgType: 'input', payload: str};

@@ -3,7 +3,7 @@ port module Form exposing (..)
 import Html.App
 import Html exposing (..)
 import Html.Events exposing (..)
-import Html.Attributes exposing (id, placeholder, type', for, value, class, classList)
+import Html.Attributes exposing (id, placeholder, type', for, value, class, disabled, classList)
 
 
 view model =
@@ -14,7 +14,7 @@ view model =
                 [ ( "hidden", model.status == "chatting" )
                 ]
             ]
-            [ h1 [] [ text "Contact" ]
+            [ h1 [] [ text "contact" ]
             , label [ for "name" ] [ text "name: " ]
             , input
                 [ id "name-field"
@@ -31,7 +31,7 @@ view model =
                 , onInput (\str -> { msgType = "email", payload = str })
                 ]
                 []
-            , div [ onClick ({ msgType = "start", payload = "" }), class "button" ] [ text "Start Chat" ]
+            , div [ onClick ({ msgType = "start", payload = "" }), class "button" ] [ text "start chat" ]
             ]
         , div
             [ id "chat-window"
@@ -45,6 +45,7 @@ view model =
                 , type' "text"
                 , placeholder "type message here..."
                 , value model.input
+                , disabled True
                 , onInput (\str -> { msgType = "input", payload = str })
                 ]
                 []

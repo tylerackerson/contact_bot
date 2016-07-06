@@ -68,8 +68,8 @@ IPM = {
 
     function setupChannel() {
         generalChannel.join().then(function(channel) {
-            print('Joined chat as '
-                + '<span class="me">' + username + '</span>.', true);
+          $('#chat-input').prop('disabled', false)
+          print('Joined chat as ' + '<span class="me">' + username + '</span>.', true);
         });
 
         // Listen for new messages sent to the channel
