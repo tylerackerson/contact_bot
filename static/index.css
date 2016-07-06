@@ -14,8 +14,12 @@
   font-weight: 700;
 }
 
+[class*="col-xs-2"]:not([class*="col-xs-offset-1"]) {
+  margin-left: 0;
+}
+
 #contact form {
-  max-width: 400px;
+  /*max-width: 400px;*/
   border: 2px solid white;
   border-radius: 10px;
   margin: 50px auto 70px;
@@ -53,7 +57,8 @@
 
 form input {
   display: block;
-  max-width: 320px;
+  /*max-width: 320px;*/
+  width: 90%;
   height: 42px;
   margin: 0 20px 20px;
   font-size: 28px;
@@ -132,10 +137,8 @@ header a:hover {
 }
 
 .references__container {
-  height: 300px;
-  width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 0 40px;
   text-align: center;
   background-color: #FFFFFF;
 }
@@ -144,9 +147,13 @@ header a:hover {
   margin-bottom: 0;
 }
 
+.references {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .reference__link {
   display: inline-block;
-  width: 20%;
   margin: 20px 0;
   text-decoration: none;
   font-weight: 300;
@@ -158,8 +165,8 @@ header a:hover {
 }
 
 .reference__logo {
-  height: 70px;
-  width: 70px;
+  height: 55px;
+  width: 55px;
   margin: 0 auto;
   background-color: white;
   display: inline-block;

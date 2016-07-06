@@ -1,308 +1,370 @@
 var _user$project$Form$initialModel = {name: '', email: '', input: '', status: 'none'};
 var _user$project$Form$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
+	return _circuithub$elm_bootstrap_html$Bootstrap_Html$containerFluid_(
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$id('contact')
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$form,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('form'),
-						_elm_lang$html$Html_Attributes$classList(
-						_elm_lang$core$Native_List.fromArray(
-							[
-								{
-								ctor: '_Tuple2',
-								_0: 'hidden',
-								_1: _elm_lang$core$Native_Utils.eq(model.status, 'chatting')
-							}
-							]))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$h1,
-						_elm_lang$core$Native_List.fromArray(
-							[]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('contact')
-							])),
-						A2(
-						_elm_lang$html$Html$label,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$for('name')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('name: ')
-							])),
-						A2(
-						_elm_lang$html$Html$input,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$id('name-field'),
-								_elm_lang$html$Html_Attributes$type$('name'),
-								_elm_lang$html$Html_Attributes$value(model.name),
-								_elm_lang$html$Html_Events$onInput(
-								function (str) {
-									return {msgType: 'name', payload: str};
-								})
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[])),
-						A2(
-						_elm_lang$html$Html$label,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$for('email-field')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('email: ')
-							])),
-						A2(
-						_elm_lang$html$Html$input,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$id('email-field'),
-								_elm_lang$html$Html_Attributes$type$('text'),
-								_elm_lang$html$Html_Attributes$value(model.email),
-								_elm_lang$html$Html_Events$onInput(
-								function (str) {
-									return {msgType: 'email', payload: str};
-								})
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[])),
-						A2(
-						_elm_lang$html$Html$div,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Events$onClick(
-								{msgType: 'start', payload: ''}),
-								_elm_lang$html$Html_Attributes$class('button')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('start chat')
-							]))
-					])),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$id('chat-window'),
-						_elm_lang$html$Html_Attributes$classList(
-						_elm_lang$core$Native_List.fromArray(
-							[
-								{
-								ctor: '_Tuple2',
-								_0: 'hidden',
-								_1: _elm_lang$core$Native_Utils.eq(model.status, 'none')
-							}
-							]))
-					]),
+				_circuithub$elm_bootstrap_html$Bootstrap_Html$row_(
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
 						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$id('messages')
+								_elm_lang$html$Html_Attributes$id('contact')
 							]),
-						_elm_lang$core$Native_List.fromArray(
-							[])),
-						A2(
-						_elm_lang$html$Html$input,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$id('chat-input'),
-								_elm_lang$html$Html_Attributes$type$('text'),
-								_elm_lang$html$Html_Attributes$placeholder('type message here...'),
-								_elm_lang$html$Html_Attributes$value(model.input),
-								_elm_lang$html$Html_Attributes$disabled(true),
-								_elm_lang$html$Html_Events$onInput(
-								function (str) {
-									return {msgType: 'input', payload: str};
-								})
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[]))
+								A9(
+								_circuithub$elm_bootstrap_html$Bootstrap_Html$colLgOffset_,
+								12,
+								0,
+								8,
+								2,
+								6,
+								3,
+								4,
+								4,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$form,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$id('form'),
+												_elm_lang$html$Html_Attributes$classList(
+												_elm_lang$core$Native_List.fromArray(
+													[
+														{
+														ctor: '_Tuple2',
+														_0: 'hidden',
+														_1: _elm_lang$core$Native_Utils.eq(model.status, 'chatting')
+													}
+													]))
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												A2(
+												_elm_lang$html$Html$h1,
+												_elm_lang$core$Native_List.fromArray(
+													[]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html$text('contact')
+													])),
+												A2(
+												_elm_lang$html$Html$label,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$for('name')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html$text('name: ')
+													])),
+												A2(
+												_elm_lang$html$Html$input,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$id('name-field'),
+														_elm_lang$html$Html_Attributes$type$('name'),
+														_elm_lang$html$Html_Attributes$value(model.name),
+														_elm_lang$html$Html_Events$onInput(
+														function (str) {
+															return {msgType: 'name', payload: str};
+														})
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[])),
+												A2(
+												_elm_lang$html$Html$label,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$for('email-field')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html$text('email: ')
+													])),
+												A2(
+												_elm_lang$html$Html$input,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$id('email-field'),
+														_elm_lang$html$Html_Attributes$type$('text'),
+														_elm_lang$html$Html_Attributes$value(model.email),
+														_elm_lang$html$Html_Events$onInput(
+														function (str) {
+															return {msgType: 'email', payload: str};
+														})
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[])),
+												A2(
+												_elm_lang$html$Html$div,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Events$onClick(
+														{msgType: 'start', payload: ''}),
+														_elm_lang$html$Html_Attributes$class('button')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html$text('start chat')
+													]))
+											])),
+										A2(
+										_elm_lang$html$Html$div,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$id('chat-window'),
+												_elm_lang$html$Html_Attributes$classList(
+												_elm_lang$core$Native_List.fromArray(
+													[
+														{
+														ctor: '_Tuple2',
+														_0: 'hidden',
+														_1: _elm_lang$core$Native_Utils.eq(model.status, 'none')
+													}
+													]))
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												A2(
+												_elm_lang$html$Html$div,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$id('messages')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[])),
+												A2(
+												_elm_lang$html$Html$input,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$id('chat-input'),
+														_elm_lang$html$Html_Attributes$type$('text'),
+														_elm_lang$html$Html_Attributes$placeholder('type message here...'),
+														_elm_lang$html$Html_Attributes$value(model.input),
+														_elm_lang$html$Html_Attributes$disabled(true),
+														_elm_lang$html$Html_Events$onInput(
+														function (str) {
+															return {msgType: 'input', payload: str};
+														})
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[]))
+											]))
+									]))
+							]))
 					])),
-				A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('references__container')
-					]),
+				_circuithub$elm_bootstrap_html$Bootstrap_Html$row_(
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$h1,
+						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('references__header')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('sources')
-							])),
-						A2(
-						_elm_lang$html$Html$a,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('reference__link'),
-								_elm_lang$html$Html_Attributes$href('https://www.twilio.com/'),
-								_elm_lang$html$Html_Attributes$target('_blank')
+								_elm_lang$html$Html_Attributes$class('references__container row')
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
 								A2(
-								_elm_lang$html$Html$div,
+								_elm_lang$html$Html$h1,
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html_Attributes$class('reference reference--twilio')
+										_elm_lang$html$Html_Attributes$class('references__header')
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										A2(
-										_elm_lang$html$Html$div,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('reference__logo')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[])),
-										A2(
-										_elm_lang$html$Html$div,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('reference__name')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('twilio')
-											]))
-									]))
-							])),
-						A2(
-						_elm_lang$html$Html$a,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('reference__link'),
-								_elm_lang$html$Html_Attributes$href('https://api.slack.com/'),
-								_elm_lang$html$Html_Attributes$target('_blank')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
+										_elm_lang$html$Html$text('built with')
+									])),
 								A2(
 								_elm_lang$html$Html$div,
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html_Attributes$class('reference reference--slack')
+										_elm_lang$html$Html_Attributes$class('references')
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										A2(
-										_elm_lang$html$Html$div,
+										A3(
+										_circuithub$elm_bootstrap_html$Bootstrap_Html$colXsOffset_,
+										2,
+										0,
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html_Attributes$class('reference__logo')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[])),
-										A2(
-										_elm_lang$html$Html$div,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('reference__name')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('slack')
-											]))
-									]))
-							])),
-						A2(
-						_elm_lang$html$Html$a,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('reference__link'),
-								_elm_lang$html$Html_Attributes$href('http://elm-lang.org/'),
-								_elm_lang$html$Html_Attributes$target('_blank')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(
-								_elm_lang$html$Html$div,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$class('reference reference--elm')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										A2(
-										_elm_lang$html$Html$div,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('reference__logo')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[])),
-										A2(
-										_elm_lang$html$Html$div,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('reference__name')
-											]),
+												A2(
+												_elm_lang$html$Html$a,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('reference__link'),
+														_elm_lang$html$Html_Attributes$href('https://www.twilio.com/'),
+														_elm_lang$html$Html_Attributes$target('_blank')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														A2(
+														_elm_lang$html$Html$div,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$class('reference reference--twilio')
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[
+																A2(
+																_elm_lang$html$Html$div,
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html_Attributes$class('reference__logo')
+																	]),
+																_elm_lang$core$Native_List.fromArray(
+																	[])),
+																A2(
+																_elm_lang$html$Html$div,
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html_Attributes$class('reference__name')
+																	]),
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html$text('twilio')
+																	]))
+															]))
+													]))
+											])),
+										A3(
+										_circuithub$elm_bootstrap_html$Bootstrap_Html$colXsOffset_,
+										2,
+										1,
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html$text('elm')
-											]))
-									]))
-							])),
-						A2(
-						_elm_lang$html$Html$a,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('reference__link'),
-								_elm_lang$html$Html_Attributes$href('https://github.com/TylerAckerson/contact_bot'),
-								_elm_lang$html$Html_Attributes$target('_blank')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								A2(
-								_elm_lang$html$Html$div,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$class('reference reference--github')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										A2(
-										_elm_lang$html$Html$div,
+												A2(
+												_elm_lang$html$Html$a,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('reference__link'),
+														_elm_lang$html$Html_Attributes$href('https://api.slack.com/'),
+														_elm_lang$html$Html_Attributes$target('_blank')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														A2(
+														_elm_lang$html$Html$div,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$class('reference reference--slack')
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[
+																A2(
+																_elm_lang$html$Html$div,
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html_Attributes$class('reference__logo')
+																	]),
+																_elm_lang$core$Native_List.fromArray(
+																	[])),
+																A2(
+																_elm_lang$html$Html$div,
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html_Attributes$class('reference__name')
+																	]),
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html$text('slack')
+																	]))
+															]))
+													]))
+											])),
+										A3(
+										_circuithub$elm_bootstrap_html$Bootstrap_Html$colXsOffset_,
+										2,
+										1,
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html_Attributes$class('reference__logo')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[])),
-										A2(
-										_elm_lang$html$Html$div,
+												A2(
+												_elm_lang$html$Html$a,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('reference__link'),
+														_elm_lang$html$Html_Attributes$href('http://elm-lang.org/'),
+														_elm_lang$html$Html_Attributes$target('_blank')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														A2(
+														_elm_lang$html$Html$div,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$class('reference reference--elm')
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[
+																A2(
+																_elm_lang$html$Html$div,
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html_Attributes$class('reference__logo')
+																	]),
+																_elm_lang$core$Native_List.fromArray(
+																	[])),
+																A2(
+																_elm_lang$html$Html$div,
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html_Attributes$class('reference__name')
+																	]),
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html$text('elm')
+																	]))
+															]))
+													]))
+											])),
+										A3(
+										_circuithub$elm_bootstrap_html$Bootstrap_Html$colXsOffset_,
+										2,
+										1,
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html_Attributes$class('reference__name')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('view source')
+												A2(
+												_elm_lang$html$Html$a,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('reference__link'),
+														_elm_lang$html$Html_Attributes$href('https://github.com/TylerAckerson/contact_bot'),
+														_elm_lang$html$Html_Attributes$target('_blank')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														A2(
+														_elm_lang$html$Html$div,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$class('reference reference--github')
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[
+																A2(
+																_elm_lang$html$Html$div,
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html_Attributes$class('reference__logo')
+																	]),
+																_elm_lang$core$Native_List.fromArray(
+																	[])),
+																A2(
+																_elm_lang$html$Html$div,
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html_Attributes$class('reference__name')
+																	]),
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		_elm_lang$html$Html$text('source')
+																	]))
+															]))
+													]))
 											]))
 									]))
 							]))

@@ -1,0 +1,13 @@
+var _elm_community$basics_extra$Basics_Extra_ops = _elm_community$basics_extra$Basics_Extra_ops || {};
+_elm_community$basics_extra$Basics_Extra_ops['=>'] = F2(
+	function (v0, v1) {
+		return {ctor: '_Tuple2', _0: v0, _1: v1};
+	});
+var _elm_community$basics_extra$Basics_Extra$never = function (n) {
+	never:
+	while (true) {
+		var _v0 = n;
+		n = _v0;
+		continue never;
+	}
+};
