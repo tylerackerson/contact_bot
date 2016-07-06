@@ -11,7 +11,7 @@ Contact uses Twilio and Slack to facilitate communication between two users. Mes
   - I still want to facilitate my end of the conversation via slack
   - Could be a "/sms [message]" slash-command
 
-# Usage
+# Local usage
 ### Set up environment variables
 1. Copy `config.env.example` and rename it `config.env`
 2. Fill in all the environment variables
@@ -22,9 +22,3 @@ Contact uses Twilio and Slack to facilitate communication between two users. Mes
 3. . ./config.env
 4. python app.py
 5. Go to localhost:3000
-
-### Start the contact bot app
-1. virtualenv contact_bot
-2. source contact_bot/bin/activate
-3. . ./config.env
-4. python contact_bot.py
