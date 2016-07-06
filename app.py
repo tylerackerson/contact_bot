@@ -1,7 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 import contact_bot
 import constants
-import logging
 
 from twilio.access_token import AccessToken, IpMessagingGrant
 from twilio.rest.ip_messaging import TwilioIpMessagingClient
@@ -44,7 +43,6 @@ def respond():
     channel_id = request.form.get('channel_id')
     text = request.form.get('text')
 
-    # local DB HOST
     connection_data = "host={0} dbname={1} user={2} password={3}".format(
         constants.DB_HOST,
         constants.DB_NAME,
@@ -100,3 +98,4 @@ def token():
 if __name__ == '__main__':
     app.debug = True
     app.run(port=3000)
+

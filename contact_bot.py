@@ -1,24 +1,13 @@
 from flask import Flask, render_template, jsonify, request
 import requests
-import time
-import random, string
 import constants
 
-from twilio.rest.ip_messaging import TwilioIpMessagingClient
 from twilio.access_token import AccessToken, IpMessagingGrant
+from twilio.rest.ip_messaging import TwilioIpMessagingClient
 from slackclient import SlackClient
 
 import psycopg2
 import psycopg2.extras
-from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy.engine import create_engine
-
-
-contact_bot = Flask(__name__)
-
-contact_bot.config['SQLALCHEMY_DATABASE_URI'] = constants.DB_HOST
-contact_bot.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(contact_bot)
 
 
 def handle_incoming(message, user, ipm_channel):
@@ -90,7 +79,6 @@ def create_user_channel(user, ipm_channel):
         channel_id = r["group"]["id"]
         invite_to_channel(channel_id, constants.SLACK_USER_ID)
 
-        # commit user + slack channel to DB
         connection_data = "host={0} dbname={1} user={2} password={3}".format(
             constants.DB_HOST,
             constants.DB_NAME,
@@ -150,21 +138,3 @@ def parse_slack_output(slack_rtm_output):
 
     return output_list
 
-# if __name__ == "__main__":
-#     contact_bot.debug = True
-#
-#     print(constants.SLACK_BOT_TOKEN)
-#     print(constants.SLACK_BOT_ID)
-#
-#     slack_client = SlackClient(constants.SLACK_BOT_TOKEN)
-#     print(slack_client)
-#
-#     READ_WEBSOCKET_DELAY = 1 # 1 second delay between reading from firehose
-#
-#     if slack_client.rtm_connect():
-#         print("Contact Bot connected and running!")
-#         while True:
-#             parse_slack_output(slack_client.rtm_read())
-#             time.sleep(READ_WEBSOCKET_DELAY)
-#     else:
-#         print("Connection failed. Invalid Slack token or bot ID?")

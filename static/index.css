@@ -19,7 +19,6 @@
 }
 
 #contact form {
-  /*max-width: 400px;*/
   border: 2px solid white;
   border-radius: 10px;
   margin: 50px auto 70px;
@@ -162,6 +161,7 @@ header a:hover {
 
 .reference__link:hover {
   color: #E68A18;
+  text-decoration: none;
 }
 
 .reference__logo {
