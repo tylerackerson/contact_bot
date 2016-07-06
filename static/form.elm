@@ -51,7 +51,7 @@ view model =
                 []
             ]
         , div [ class "references__container" ]
-            [ h1 [ class "references__header" ] [ text "sources" ]
+            [ h1 [ class "references__header" ] [ text "built with" ]
             , a
                 [ class "reference__link"
                 , href "https://www.twilio.com/"
