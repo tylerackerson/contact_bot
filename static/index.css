@@ -213,7 +213,54 @@ header a:hover {
 .info {
   margin:5px 0;
   font-style:italic;
+  -webkit-transition: all 2s;
+  transition: all 2s;
 }
+
+.info.starting {
+  width: 100%;
+  padding-top: 140px;
+  font-size: 60px;
+  text-align: center;
+  background-color: rgba(255,255,255,0.5);
+  color: #477E91;
+  height: 98%;
+  -webkit-transition: all 2s;
+  transition: all 2s;
+}
+
+.waiting.starting {
+  background-size: cover;
+  background-image: url('./img/logo-twilio.svg');
+  z-index: 10;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin:-60px 0 0 -60px;
+
+  opacity: 1;
+  visibility: visible;
+
+  -webkit-animation:spin 2s linear infinite;
+  -moz-animation:spin 2s linear infinite;
+  animation:spin 2s linear infinite;
+}
+
+.waiting {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+
+  -webkit-transition: opacity 2s;
+  transition: opacity 2s;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .me, .username.me {
   color: #E68A12;

@@ -100,5 +100,3 @@ def token():
 if __name__ == '__main__':
     app.debug = True
     app.run(port=3000)
-    app.logger.addHandler(logging.StreamHandler(sys.stdout))
-    app.logger.setLevel(logging.ERROR)
